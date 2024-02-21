@@ -403,6 +403,10 @@ Window is selected according to PREFIX:
      (t             (display-buffer buf)))
     (when imagep
       (with-current-buffer buf
+        (goto-char (point-min))
+        ;; Java outputs the currently set JAVA_OPTIONS when, exclude it
+        ;; when viewing the preview
+        (flush-lines "^Picked up.*JAVA.*OPTIONS:.*$")
         (image-mode)
         (set-buffer-multibyte t)))))
 
